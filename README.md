@@ -2,7 +2,7 @@
 
 This repository contains the code and data access instructions to reproduce the figures and analyses presented in our manuscript, "[Insert Paper Title Here]".
 
-## 📥 Data Download
+## Data Download
 
 The raw sequencing data is publicly available from the China National Center for Bioinformation (CNCB) under the following accessions.
 
@@ -34,7 +34,7 @@ This dataset includes the Pulse-Chase experiment data for HEK293T cells.
 
 ---
 
-## ⚙️ Data Preprocessing
+## Data Preprocessing
 
 If you choose to start with the raw data from CNCB, follow the steps below to process it.
 
@@ -52,7 +52,7 @@ If you choose to start with the raw data from CNCB, follow the steps below to pr
 
 ---
 
-## 🎨 Reproducing Figures
+## Reproducing Figures
 
 To reproduce all the figures in the paper, you can use the pre-processed data provided. This is the recommended and most straightforward approach.
 
