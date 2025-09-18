@@ -1,4 +1,4 @@
-# Code and Data for "[Ribosome dynamics govern mRNA stability and translation across natural and synthetic systems]"
+# Code and Data for "Ribosome dynamics govern mRNA stability and translation across natural and synthetic systems"
 
 This repository contains the code and data access instructions to reproduce the figures and analyses presented in our manuscript, "[Insert Paper Title Here]".
 
