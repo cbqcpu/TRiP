@@ -1,4 +1,4 @@
-# Code for "TRiP"
+# TRiP
 
 This repository contains the code and data access instructions to reproduce the figures and analyses presented in our manuscript, "Ribosome dynamics govern mRNA stability and translation across natural and synthetic systems".
 
