@@ -45,8 +45,8 @@ If you choose to start with the raw data from CNCB, follow the steps below to pr
     ```
 2.  **Next, run the R scripts** to load the processed data into R objects for analysis:
     ```R
-    "load_data_to_R_293_all_sample.R"
-    "load_data_to_R_THP1_all_sample.R"
+    load_data_to_R_293_all_sample.R
+    load_data_to_R_THP1_all_sample.R
     ```
 ---
 
