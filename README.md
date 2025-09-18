@@ -60,10 +60,10 @@ To reproduce all the figures in the paper, you can use the pre-processed data pr
 2.  Place the downloaded data into the project's working directory.
 
 3.  **Run the analysis scripts** for each figure to generate the plots:
-    * `Figure1.R`
-    * `Figure2.R`
-    * `Figure3.R`
-    * `Figure4.R`
-    * `Figure5.R`
+    * `Figure1_and_S1.R`
+    * `Figure2_and_S2.R`
+    * `Figure3_and_S3.R`
+    * `Figure4_and_S4_S5.R`
+    * `Figure5_and_S6.R`
 
 *Note: Please ensure you have all the necessary R and Python packages installed. Check the script files for specific library dependencies.*
