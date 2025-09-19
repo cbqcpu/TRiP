@@ -384,6 +384,7 @@ print(FigS6D_compare_MFE)
 # FigS6A
 model <- lm(lib_12h_MRL ~ RL, data = coupling_data_with_GFP)
 r_squared <- summary(model)$r.squared
+cor_test_FigS6A <- cor.test(coupling_data_with_GFP$RL, coupling_data_with_GFP$lib_12h_MRL)
 FigS6A_p3 <- ggplot() +
   geom_point(data = subset(coupling_data_with_GFP, is.na(group)),
              aes(x = RL, y = lib_12h_MRL, color = "NA"), alpha = 0.1) +
@@ -639,6 +640,7 @@ add_corr <- function(data, x, y) {
 }
 
 # Plot 1: train_MRL$Norm_MRL vs. train_MRL$MRL_2h_pred
+cor_test_FigS6E_train_MRL <- cor.test(train_MRL$Norm_MRL,train_MRL$MRL_2h_pred)
 FigS6E_train_MRL <- ggplot(train_MRL, aes(x = Norm_MRL, y = MRL_2h_pred)) +
   geom_point(color = "#4ba2dd", alpha = 0.3) +
   geom_smooth(method = "lm", color = "#08306b", se = FALSE) +
@@ -662,6 +664,7 @@ FigS6E_train_MRL <- ggplot(train_MRL, aes(x = Norm_MRL, y = MRL_2h_pred)) +
   )
 
 # Plot 2: train_MRL_diff$Norm_MRL_diff vs. train_MRL_diff$MRL_diff_pred
+cor_test_FigS6E_train_MRL_diff <- cor.test(train_MRL_diff$Norm_MRL_diff,train_MRL_diff$MRL_diff_pred)
 FigS6E_train_MRL_diff <- ggplot(train_MRL_diff, aes(x = Norm_MRL_diff, y = MRL_diff_pred)) +
   geom_point(color = "#4ba2dd", alpha = 0.3) +
   geom_smooth(method = "lm", color = "#08306b", se = FALSE) +
@@ -685,6 +688,7 @@ FigS6E_train_MRL_diff <- ggplot(train_MRL_diff, aes(x = Norm_MRL_diff, y = MRL_d
   )
 
 # Plot 3: valid_MRL$Norm_MRL vs. valid_MRL$MRL_2h_pred
+cor_test_FigS6E_valid_MRL <- cor.test(valid_MRL$Norm_MRL,valid_MRL$MRL_2h_pred)
 FigS6E_valid_MRL <- ggplot(valid_MRL, aes(x = Norm_MRL, y = MRL_2h_pred)) +
   geom_point(color = "#4ba2dd", alpha = 0.3) +
   geom_smooth(method = "lm", color = "#08306b", se = FALSE) +
@@ -708,6 +712,7 @@ FigS6E_valid_MRL <- ggplot(valid_MRL, aes(x = Norm_MRL, y = MRL_2h_pred)) +
   )
 
 # Plot 4: valid_MRL_diff$Norm_MRL_diff vs. valid_MRL_diff$MRL_diff_pred
+cor_test_FigS6E_valid_MRL_diff <- cor.test(valid_MRL_diff$Norm_MRL_diff,valid_MRL_diff$MRL_diff_pred)
 FigS6E_valid_MRL_diff <- ggplot(valid_MRL_diff, aes(x = Norm_MRL_diff, y = MRL_diff_pred)) +
   geom_point(color = "#4ba2dd", alpha = 0.3) +
   geom_smooth(method = "lm", color = "#08306b", se = FALSE) +
@@ -749,6 +754,7 @@ add_corr_and_p <- function(data, x_col, y_col) {
 }
 
 # First plot with labels at top-left
+cor_test_FigS6E_independent_test_withGFP_MRL_plot <- cor.test(independent_test_withGFP_MRL$Norm_MRL,independent_test_withGFP_MRL$MRL_2h_pred)
 FigS6E_independent_test_withGFP_MRL_plot <- ggplot(independent_test_withGFP_MRL, aes(x = Norm_MRL, y = MRL_2h_pred)) +
   geom_point(color = "#4ba2dd", alpha = 0.3) +
   geom_smooth(method = "lm", color = "#08306b", se = FALSE) +

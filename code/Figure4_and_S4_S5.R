@@ -55,6 +55,7 @@ auc_diff_293_THP1 <- auc_diff_293_THP1 %>%
   )
 
 # Create the scatter plot
+cor_test_Fig4C <- cor.test(auc_diff_293_THP1$auc_diff_293, auc_diff_293_THP1$auc_diff_THP1)
 Fig4C_plot_auc <- ggplot(auc_diff_293_THP1, aes(x = auc_diff_293, y = auc_diff_THP1)) +
   geom_point(aes(color = ifelse(highlight_upper, "#e95966", 
                                 ifelse(highlight_lower, "#00bad5", "grey")), alpha = 0.5)) +
@@ -271,6 +272,7 @@ filtered_data <- derivatives_df_half_life[complete.cases(derivatives_df_half_lif
 cor_value_comparison <- cor(filtered_data$mean_derivative_new, filtered_data$mean_derivative_old)
 
 # Create the comparison plot for mean_derivative_new vs mean_derivative_old with a regression line
+cor_test_FigS4C <- cor.test(filtered_data$mean_derivative_new, filtered_data$mean_derivative_old)
 FigS4C_comparison_plot <- ggplot(filtered_data, aes(x = mean_derivative_new, y = mean_derivative_old)) +
   geom_point(color = "#4ba2dd", size = 3, alpha = 0.1) +  # Add points with transparency
   geom_smooth(method = "lm", color = "#08306b", se = FALSE) +  # Add regression line
@@ -434,6 +436,10 @@ MRL_diff <- MRL_diff[(!is.infinite(MRL_diff$NC_30min))&(!is.infinite(MRL_diff$NC
 cor_30min <- cor(MRL_diff$auc_diff, MRL_diff$NC_30min)
 cor_1h <- cor(MRL_diff$auc_diff, MRL_diff$NC_1h)
 cor_2h <- cor(MRL_diff$auc_diff, MRL_diff$NC_2h)
+
+cor_test_FigS4E_plot1 <- cor.test(MRL_diff$auc_diff, MRL_diff$NC_30min)
+cor_test_FigS4E_plot2 <- cor.test(MRL_diff$auc_diff, MRL_diff$NC_1h)
+cor_test_FigS4E_plot3 <- cor.test(MRL_diff$auc_diff, MRL_diff$NC_2h)
 
 FigS4E_plot1 <- ggplot(MRL_diff, aes(x = auc_diff, y = NC_30min)) +
   stat_density_2d(geom = "path", color = "#99c3e5") +
@@ -1450,6 +1456,10 @@ MRL_LPS_diff$highlight_upper1 <- MRL_LPS_diff$residuals1 > (1 * std_dev1)
 MRL_LPS_diff$highlight_lower1 <- MRL_LPS_diff$residuals1 < (-1 * std_dev1)
 MRL_LPS_diff$label1 <- ifelse(MRL_LPS_diff$gene_name %in% label_gene_set, as.character(MRL_LPS_diff$gene_name), "")
 MRL_LPS_diff$shape_factor1 <- ifelse(MRL_LPS_diff$gene_name %in% label_gene_set, "highlighted", "normal")
+
+cor_test_Fig4H_plot1 <- cor.test(MRL_LPS_diff$NC_2h, MRL_LPS_diff$LPS_2h)
+cor_test_Fig4H_plot2 <- cor.test(MRL_LPS_diff$NC_2h, MRL_LPS_diff$LPS_12h)
+cor_test_Fig4H_plot3 <- cor.test(MRL_LPS_diff$NC_2h, MRL_LPS_diff$LPS_24h)
 
 Fig4H_plot1 <- ggplot(MRL_LPS_diff, aes(x = NC_2h, y = LPS_2h)) +
   geom_point(aes(color = ifelse(gene_name %in% label_gene_set, "#54278f",

@@ -1,4 +1,4 @@
-source("R/polysome_seq_functions_20230703.R")
+source("code/polysome_seq_functions.R")
 load("data/HEK293T_preprocessed.RData")
 load("data/RNA_features_gene_level_20240418.RData")
 library(readr)
@@ -7,7 +7,7 @@ library(ggplot2)
 library(dplyr)
 library(gridExtra)
 library(effsize)
-source("R/RNA_features_new.R")
+source("code/RNA_features_new.R")
 
 merge_df_counts_select <- merge_df_counts[rowMeans(merge_df_counts[,-1])>1000,]
 merge_df_counts_new_select <- merge_df_counts_new[merge_df_counts$gene_id %in% merge_df_counts_select$gene_id,]
@@ -1004,6 +1004,7 @@ MRL_STM2457_diff <- MRL_STM2457_diff %>%
 MRL_STM2457_diff$gene_id <- merge_df_counts_new_select$gene_id
 
 # Create the plot and highlight upper and lower outliers with specified colors
+cor_test_Fig3F <- cor.test(MRL_STM2457_diff$NC_2h, MRL_STM2457_diff$STM2457)
 Fig3F_plot1 <- ggplot(MRL_STM2457_diff, aes(x = NC_2h, y = STM2457)) +
   geom_point(aes(color = ifelse(highlight_upper1, "#e95966", ifelse(highlight_lower1, "#00bad5", "grey")), alpha = 0.01)) +
   geom_smooth(method = "lm", se = FALSE) +
@@ -1145,6 +1146,7 @@ MRL_YTHDF_diff <- MRL_YTHDF_diff %>%
   )
 
 # Create the plot and highlight upper and lower outliers with specified colors
+cor_test_Fig3H <- cor.test(MRL_YTHDF_diff$NC_2h, MRL_YTHDF_diff$YTHDF1)
 Fig3H_plot1 <- ggplot(MRL_YTHDF_diff, aes(x = NC_2h, y = YTHDF1)) +
   geom_point(aes(color = ifelse(highlight_upper1, "#e95966", ifelse(highlight_lower1, "#00bad5", "grey")), alpha = 0.01)) +
   geom_smooth(method = "lm", se = FALSE) +
@@ -1180,6 +1182,7 @@ MRL_YTHDF_diff <- MRL_YTHDF_diff %>%
   )
 
 # Create the plot for the second model and highlight upper and lower outliers with specified colors
+cor_test_FigS3F <- cor.test(MRL_YTHDF_diff$NC_2h, MRL_YTHDF_diff$YTHDF2)
 FigS3F_plot2 <- ggplot(MRL_YTHDF_diff, aes(x = NC_2h, y = YTHDF2)) +
   geom_point(aes(color = ifelse(highlight_upper2, "#e95966", ifelse(highlight_lower2, "#00bad5", "grey")), alpha = 0.01)) +
   geom_smooth(method = "lm", se = FALSE) +
@@ -1216,6 +1219,7 @@ MRL_YTHDF_diff <- MRL_YTHDF_diff %>%
     highlight_lower3 = rank(residuals3) <= 725    # Top 100 negative residuals
   )
 # Create the plot for the second model and highlight upper and lower outliers with specified colors
+cor_test_FigS3G <- cor.test(MRL_YTHDF_diff$NC_2h, MRL_YTHDF_diff$YTHDF3)
 FigS3G_plot3 <- ggplot(MRL_YTHDF_diff, aes(x = NC_2h, y = YTHDF3)) +
   geom_point(aes(color = ifelse(highlight_upper3, "#e95966", ifelse(highlight_lower3, "#00bad5", "grey")), alpha = 0.01)) +
   geom_smooth(method = "lm", se = FALSE) +

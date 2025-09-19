@@ -182,30 +182,49 @@ MRL_diff_output$gene_id <- merge_df_counts_select$gene_id
 
 MRL_diff$auc_diff <- auc_diff
 MRL_diff <- MRL_diff[(!is.infinite(MRL_diff$NC_30min))&(!is.infinite(MRL_diff$NC_1h))&(!is.infinite(MRL_diff$NC_2h)), ]
-cor_30min <- cor(MRL_diff$auc_diff, MRL_diff$NC_30min)
-cor_1h <- cor(MRL_diff$auc_diff, MRL_diff$NC_1h)
-cor_2h <- cor(MRL_diff$auc_diff, MRL_diff$NC_2h)
+# Calculate correlation and p-value for each time point
+cor_test_30min <- cor.test(MRL_diff$auc_diff, MRL_diff$NC_30min)
+cor_30min <- cor_test_30min$estimate
+pval_30min <- cor_test_30min$p.value
 
+cor_test_1h <- cor.test(MRL_diff$auc_diff, MRL_diff$NC_1h)
+cor_1h <- cor_test_1h$estimate
+pval_1h <- cor_test_1h$p.value
+
+cor_test_2h <- cor.test(MRL_diff$auc_diff, MRL_diff$NC_2h)
+cor_2h <- cor_test_2h$estimate
+pval_2h <- cor_test_2h$p.value
+
+# Plot for 30 min
 FigS2C_plot1 <- ggplot(MRL_diff, aes(x = auc_diff, y = NC_30min)) +
   stat_density_2d(geom = "path", color = "#99c3e5") +
   labs(x = "AUC Difference", y = "MRL Difference", title = "NC 30min") +
-  base_theme+
-  annotate("text", x = Inf, y = Inf, label = sprintf("r = %.2f", cor_30min), 
-           hjust = 1.1, vjust = 2, size = 3)
+  base_theme +
+  annotate("text", x = Inf, y = Inf, 
+           label = paste0("r = ", round(cor_30min, 2), 
+                          "\nP = ", format.pval(pval_30min, digits = 2, eps = 0.001)), 
+           hjust = 1.1, vjust = 1.5, size = 3)
 
+# Plot for 1h
 FigS2C_plot2 <- ggplot(MRL_diff, aes(x = auc_diff, y = NC_1h)) +
   stat_density_2d(geom = "path", color = "#99c3e5") +
   labs(x = "AUC Difference", y = "MRL Difference", title = "NC 1h") +
   base_theme +
-  annotate("text", x = Inf, y = Inf, label = sprintf("r = %.2f", cor_1h), 
-           hjust = 1.1, vjust = 2, size = 3)
+  annotate("text", x = Inf, y = Inf, 
+           label = paste0("r = ", round(cor_1h, 2), 
+                          "\nP = ", format.pval(pval_1h, digits = 2, eps = 0.001)), 
+           hjust = 1.1, vjust = 1.5, size = 3)
 
+# Plot for 2h
 FigS2C_plot3 <- ggplot(MRL_diff, aes(x = auc_diff, y = NC_2h)) +
   stat_density_2d(geom = "path", color = "#99c3e5") +
   labs(x = "AUC Difference", y = "MRL Difference", title = "NC 2h") +
   base_theme +
-  annotate("text", x = Inf, y = Inf, label = sprintf("r = %.2f", cor_2h), 
-           hjust = 1.1, vjust = 2, size = 3)
+  annotate("text", x = Inf, y = Inf, 
+           label = paste0("r = ", round(cor_2h, 2), 
+                          "\nP = ", format.pval(pval_2h, digits = 2, eps = 0.001)), 
+           hjust = 1.1, vjust = 1.5, size = 3)
+
 
 
 mean_values_30min <- data.frame(
@@ -691,7 +710,7 @@ Fig2F_AUC_diff_plot <- ggplot(plot_data, aes(x = AUC_diff, y = ratio_log2, color
 high_coupling_genes_metascape <- read_excel("data/metascape_result.ts30_g8y2_high_coupling.xlsx")
 low_coupling_genes_metascape <- read_excel("data/metascape_result.t802z8gu5_low_coupling.xlsx")
 
-source("R/RNA_function.R")
+source("code/RNA_function.R")
 
 result_high <- summary_gene_function(high_coupling_genes_metascape)
 result_low <- summary_gene_function(low_coupling_genes_metascape)
@@ -890,7 +909,7 @@ MRL_diff_NC_combine <- na.omit(MRL_diff_NC_combine)
 auc_merge_clean$transcript_id <- auc_merge_clean$tracking_id
 MRL_diff_NC_combine_with_AUC_diff <- merge(MRL_diff_NC_combine, auc_merge_clean, by = "transcript_id")
 
-
+cor_test_S2F <- cor.test(MRL_diff_NC_combine$NC_2h, MRL_diff_NC_combine$MRL_diff_iso_NC2h)
 FigS2F <- ggplot(data = MRL_diff_NC_combine, aes(x = NC_2h, y = MRL_diff_iso_NC2h)) +
   geom_point(color = "#56B4E9", alpha = 0.5) +  # Plot points with a specified color
   geom_density_2d(color = "#D55E00") +  # Add density contours with a distinct color
