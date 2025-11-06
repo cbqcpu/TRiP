@@ -74,3 +74,6 @@ To reproduce the results:
 Install R (version 4.5.2 or later is recommended).
 
 Install the required packages as listed in the file, whith contains the package names and versions used for the reproduction test: installed_R_packages.csv
+
+The preprocessing of RNA-seq data uses Python scripts that require Python packages. You can install these packages with the following command and the environment.yml:
+```bash conda env create -f environment.yml -n new_env_name```
