@@ -73,4 +73,4 @@ To reproduce the results:
 
 Install R (version 4.5.2 or later is recommended).
 
-Install the required packages as listed in the file, whith contains the package names and versions used for the reproduction test.: installed_R_packages.csv
+Install the required packages as listed in the file, whith contains the package names and versions used for the reproduction test: installed_R_packages.csv
