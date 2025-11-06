@@ -66,4 +66,11 @@ To reproduce all the figures in the paper, you can use the pre-processed data pr
     * `Figure4_and_S4_S5.R`
     * `Figure5_and_S6.R`
 
-*Note: Please ensure you have all the necessary R and Python packages installed. Check the script files for specific library dependencies.*
+## R Packages
+The analysis was originally developed using an older version of R, but it has been successfully tested and reproduced using R version 4.5.2 with the latest versions of all required packages.
+
+To reproduce the results:
+
+Install R (version 4.5.2 or later is recommended).
+
+Install the required packages as listed in the file, whith contains the package names and versions used for the reproduction test.: installed_R_packages.csv
