@@ -66,7 +66,7 @@ To reproduce all the figures in the paper, you can use the pre-processed data pr
     * `Figure4_and_S4_S5.R`
     * `Figure5_and_S6.R`
 
-## R Packages
+## R and python environments
 The analysis was originally developed using an older version of R, but it has been successfully tested and reproduced using R version 4.5.2 with the latest versions of all required packages.
 
 To reproduce the results:
