@@ -164,6 +164,10 @@ Fig5I_2_MRL_2h_no_difference_p3 <- ggplot(MRL_2h_no_difference, aes(x = group, y
   )
 print(Fig5I_2_MRL_2h_no_difference_p3)
 
+write.csv(MRL_2h_no_difference, file = "Fig5I.csv", quote = F, row.names = F)
+write.csv(MRL_2h_no_difference, file = "Fig5H.csv", quote = F, row.names = F)
+write.csv(MRL_2h_no_difference, file = "FigS7C.csv", quote = F, row.names = F)
+
 # Fig5F
 cor_results <- cor.test(test_set_2000_MFE$MRL_diff, test_set_2000_MFE$MFE, method = "pearson")
 cor_value <- round(cor_results$estimate, 3)
@@ -194,6 +198,8 @@ Fig5F_compare_MFE_regression <- ggplot(test_set_2000_MFE, aes(x = MRL_diff, y = 
   )
 print(Fig5F_compare_MFE_regression)
 
+write.csv(test_set_2000_MFE, file = "Fig5F.csv", quote = F, row.names = F)
+
 # Fig5G
 cor_results <- cor.test(coupling_data_with_GFP_select$MRL_diff, coupling_data_with_GFP_select$mRNA_deg, method = "pearson")
 cor_value <- round(cor_results$estimate, 3)
@@ -223,6 +229,8 @@ Fig5G_plot1 <- ggplot(coupling_data_with_GFP_select, aes(x = MRL_diff, y = mRNA_
     panel.border = element_rect(color = "black", linewidth = 1)
   )
 print(Fig5G_plot1)
+
+write.csv(coupling_data_with_GFP_select, file = "Fig5G.csv", quote = F, row.names = F)
 
 # Fig5D
 pattern_data <- coupling_data %>%
@@ -287,6 +295,8 @@ Fig5D_p_two_patterns <- ggplot(summary_data, aes(x = time_point, y = mean_MRL, g
   )
 print(Fig5D_p_two_patterns)
 
+write.csv(summary_data, file = "Fig5D.csv", quote = F, row.names = F)
+
 # Fig5E
 pattern_data <- coupling_data %>%
   mutate(
@@ -320,6 +330,8 @@ Fig5E <- ggplot(comparison_data, aes(x = pattern, y = MRL_diff_2h_1h, fill = pat
     panel.border = element_rect(color = "black", linewidth = 1)
   )
 print(Fig5E)
+
+write.csv(comparison_data, file = "Fig5E.csv", quote = F, row.names = F)
 
 # Fig5C
 pattern_data <- coupling_data %>%
@@ -356,6 +368,8 @@ Fig5C <- Heatmap(heatmap_data_scaled,
 )
 print(Fig5C)
 
+write.csv(heatmap_data_scaled, file = "Fig5C.csv", quote = F, row.names = F)
+
 # FigS6D
 top_10_percent <- read_csv("data/test_set_top_10_percent_MFE_NUPACK.csv")
 bottom_10_percent <- read_csv("data/test_set_bottom_10_percent_MFE_NUPACK.csv")
@@ -364,7 +378,7 @@ top_10_percent <- top_10_percent %>%
 bottom_10_percent <- bottom_10_percent %>%
   mutate(Group = "Bottom 10%")
 combined_data <- bind_rows(top_10_percent, bottom_10_percent)
-FigS6D_compare_MFE <- ggboxplot(combined_data, x = "Group", y = "MFE", fill = "Group",
+FigS7D_compare_MFE <- ggboxplot(combined_data, x = "Group", y = "MFE", fill = "Group",
                                 palette = c("Top 10%" = "#bd0026", "Bottom 10%" = "#253494"),
                                 title = "Comparison of MFE Between Top 10% and Bottom 10%",
                                 xlab = "MRL-diff", ylab = "Minimum Free Energy (MFE)",
@@ -379,13 +393,15 @@ FigS6D_compare_MFE <- ggboxplot(combined_data, x = "Group", y = "MFE", fill = "G
     panel.grid.minor = element_blank(),
     panel.border = element_rect(color = "black", linewidth = 1)
   )
-print(FigS6D_compare_MFE)
+print(FigS7D_compare_MFE)
+
+write.csv(combined_data, file = "FigS7D.csv", quote = F, row.names = F)
 
 # FigS6A
 model <- lm(lib_12h_MRL ~ RL, data = coupling_data_with_GFP)
 r_squared <- summary(model)$r.squared
 cor_test_FigS6A <- cor.test(coupling_data_with_GFP$RL, coupling_data_with_GFP$lib_12h_MRL)
-FigS6A_p3 <- ggplot() +
+FigS7A_p3 <- ggplot() +
   geom_point(data = subset(coupling_data_with_GFP, is.na(group)),
              aes(x = RL, y = lib_12h_MRL, color = "NA"), alpha = 0.1) +
   geom_point(data = subset(coupling_data_with_GFP, !is.na(group)),
@@ -406,9 +422,9 @@ FigS6A_p3 <- ggplot() +
     panel.grid.minor = element_blank(),
     panel.border = element_rect(color = "black", linewidth = 1)
   )
-print(FigS6A_p3)
+print(FigS7A_p3)
 
-
+write.csv(coupling_data_with_GFP, file = "FigS7A.csv", quote = F, row.names = F)
 
 
 
@@ -497,6 +513,8 @@ Fig5K_predicted <- ggplot(RandomDesign_50_seq_1m, aes(x = MRL_diff, y = MRL_2h))
 # Output the plot
 print(Fig5K_predicted)
 
+write.csv(RandomDesign_50_seq_1m, file = "Fig5K.csv", quote = F, row.names = F)
+
 
 library(readr)
 library(dplyr)
@@ -559,7 +577,7 @@ Fig5L_p <- ggplot(mean_intensity_summary, aes(x = Group, y = mean_value, fill = 
     panel.border = element_rect(color = "black", linewidth = 1)
   )
 
-
+write.csv(mean_intensity_summary, file = "Fig5L.csv", quote = F, row.names = F)
 
 
 LNP_mouse_liver_GFP_quant <- read_csv("data/LNP_mouse_liver_GFP_quant.csv")
@@ -623,7 +641,7 @@ Fig5M <- GFP_expression_mouse_liver <- ggplot(LNP_mouse_liver_GFP_quant, aes(x =
     label = "p.format" # Format the p-values nicely
   )
 
-
+write.csv(LNP_mouse_liver_GFP_quant, file = "Fig5M.csv", quote = F, row.names = F)
 
 train_MRL <- read_csv("data/MRL_diff_output_model_20241028/train_MRL.csv")
 train_MRL_diff <- read_csv("data/MRL_diff_output_model_20241028/train_MRL_diff.csv")
@@ -640,8 +658,8 @@ add_corr <- function(data, x, y) {
 }
 
 # Plot 1: train_MRL$Norm_MRL vs. train_MRL$MRL_2h_pred
-cor_test_FigS6E_train_MRL <- cor.test(train_MRL$Norm_MRL,train_MRL$MRL_2h_pred)
-FigS6E_train_MRL <- ggplot(train_MRL, aes(x = Norm_MRL, y = MRL_2h_pred)) +
+cor_test_FigS7E_train_MRL <- cor.test(train_MRL$Norm_MRL,train_MRL$MRL_2h_pred)
+FigS7E_train_MRL <- ggplot(train_MRL, aes(x = Norm_MRL, y = MRL_2h_pred)) +
   geom_point(color = "#4ba2dd", alpha = 0.3) +
   geom_smooth(method = "lm", color = "#08306b", se = FALSE) +
   annotate(
@@ -664,8 +682,8 @@ FigS6E_train_MRL <- ggplot(train_MRL, aes(x = Norm_MRL, y = MRL_2h_pred)) +
   )
 
 # Plot 2: train_MRL_diff$Norm_MRL_diff vs. train_MRL_diff$MRL_diff_pred
-cor_test_FigS6E_train_MRL_diff <- cor.test(train_MRL_diff$Norm_MRL_diff,train_MRL_diff$MRL_diff_pred)
-FigS6E_train_MRL_diff <- ggplot(train_MRL_diff, aes(x = Norm_MRL_diff, y = MRL_diff_pred)) +
+cor_test_FigS7E_train_MRL_diff <- cor.test(train_MRL_diff$Norm_MRL_diff,train_MRL_diff$MRL_diff_pred)
+FigS7E_train_MRL_diff <- ggplot(train_MRL_diff, aes(x = Norm_MRL_diff, y = MRL_diff_pred)) +
   geom_point(color = "#4ba2dd", alpha = 0.3) +
   geom_smooth(method = "lm", color = "#08306b", se = FALSE) +
   annotate(
@@ -688,8 +706,8 @@ FigS6E_train_MRL_diff <- ggplot(train_MRL_diff, aes(x = Norm_MRL_diff, y = MRL_d
   )
 
 # Plot 3: valid_MRL$Norm_MRL vs. valid_MRL$MRL_2h_pred
-cor_test_FigS6E_valid_MRL <- cor.test(valid_MRL$Norm_MRL,valid_MRL$MRL_2h_pred)
-FigS6E_valid_MRL <- ggplot(valid_MRL, aes(x = Norm_MRL, y = MRL_2h_pred)) +
+cor_test_FigS7E_valid_MRL <- cor.test(valid_MRL$Norm_MRL,valid_MRL$MRL_2h_pred)
+FigS7E_valid_MRL <- ggplot(valid_MRL, aes(x = Norm_MRL, y = MRL_2h_pred)) +
   geom_point(color = "#4ba2dd", alpha = 0.3) +
   geom_smooth(method = "lm", color = "#08306b", se = FALSE) +
   annotate(
@@ -712,8 +730,8 @@ FigS6E_valid_MRL <- ggplot(valid_MRL, aes(x = Norm_MRL, y = MRL_2h_pred)) +
   )
 
 # Plot 4: valid_MRL_diff$Norm_MRL_diff vs. valid_MRL_diff$MRL_diff_pred
-cor_test_FigS6E_valid_MRL_diff <- cor.test(valid_MRL_diff$Norm_MRL_diff,valid_MRL_diff$MRL_diff_pred)
-FigS6E_valid_MRL_diff <- ggplot(valid_MRL_diff, aes(x = Norm_MRL_diff, y = MRL_diff_pred)) +
+cor_test_FigS7E_valid_MRL_diff <- cor.test(valid_MRL_diff$Norm_MRL_diff,valid_MRL_diff$MRL_diff_pred)
+FigS7E_valid_MRL_diff <- ggplot(valid_MRL_diff, aes(x = Norm_MRL_diff, y = MRL_diff_pred)) +
   geom_point(color = "#4ba2dd", alpha = 0.3) +
   geom_smooth(method = "lm", color = "#08306b", se = FALSE) +
   annotate(
@@ -754,8 +772,8 @@ add_corr_and_p <- function(data, x_col, y_col) {
 }
 
 # First plot with labels at top-left
-cor_test_FigS6E_independent_test_withGFP_MRL_plot <- cor.test(independent_test_withGFP_MRL$Norm_MRL,independent_test_withGFP_MRL$MRL_2h_pred)
-FigS6E_independent_test_withGFP_MRL_plot <- ggplot(independent_test_withGFP_MRL, aes(x = Norm_MRL, y = MRL_2h_pred)) +
+cor_test_FigS7E_independent_test_withGFP_MRL_plot <- cor.test(independent_test_withGFP_MRL$Norm_MRL,independent_test_withGFP_MRL$MRL_2h_pred)
+FigS7E_independent_test_withGFP_MRL_plot <- ggplot(independent_test_withGFP_MRL, aes(x = Norm_MRL, y = MRL_2h_pred)) +
   geom_point(color = "#4ba2dd", alpha = 0.3) +
   geom_smooth(method = "lm", color = "#08306b", se = FALSE) +
   annotate(
@@ -779,7 +797,7 @@ FigS6E_independent_test_withGFP_MRL_plot <- ggplot(independent_test_withGFP_MRL,
   )
 
 # Second plot with labels at top-left
-FigS6E_independent_test_withGFP_MRL_diff_plot <- ggplot(independent_test_withGFP_MRL_diff, aes(x = Norm_MRL_diff, y = MRL_diff_pred)) +
+FigS7E_independent_test_withGFP_MRL_diff_plot <- ggplot(independent_test_withGFP_MRL_diff, aes(x = Norm_MRL_diff, y = MRL_diff_pred)) +
   geom_point(color = "#4ba2dd", alpha = 0.3) +
   geom_smooth(method = "lm", color = "#08306b", se = FALSE) +
   annotate(
@@ -803,6 +821,56 @@ FigS6E_independent_test_withGFP_MRL_diff_plot <- ggplot(independent_test_withGFP
   )
 
 
+train_MRL <- read_csv("data/MRL_diff_output_model_20241028/train_MRL.csv")
+train_MRL_diff <- read_csv("data/MRL_diff_output_model_20241028/train_MRL_diff.csv")
+
+valid_MRL <- read_csv("data/MRL_diff_output_model_20241028/valid_MRL.csv")
+valid_MRL_diff <- read_csv("data/MRL_diff_output_model_20241028/valid_MRL_diff.csv")
+
+write.csv(train_MRL, file = "FigS7E_train_MRL.csv", quote = F, row.names = F)
+write.csv(train_MRL_diff, file = "FigS7E_train_MRL_diff.csv", quote = F, row.names = F)
+write.csv(valid_MRL, file = "FigS7E_valid_MRL.csv", quote = F, row.names = F)
+write.csv(valid_MRL_diff, file = "FigS7E_train_valid_MRL.csv", quote = F, row.names = F)
 
 
 
+# Compute relative rates of change (derivatives)
+pattern_data <- pattern_data %>%
+  mutate(
+    derivative_2h_1h = (lib_2h_MRL - lib_1h_MRL) / lib_1h_MRL,
+    derivative_12h_2h = (lib_12h_MRL - lib_2h_MRL) / lib_2h_MRL
+  )
+
+# Filter only "Rise and Fall" sequences
+rise_fall_data <- pattern_data %>% filter(pattern == "Rise and Fall")
+
+# Compute correlation
+cor_test <- cor.test(rise_fall_data$derivative_2h_1h, rise_fall_data$derivative_12h_2h)
+cor_value <- round(cor_test$estimate, 3)
+p_value <- signif(cor_test$p.value, 3)
+
+# Create the plot
+FigS6B_loading_unloading_of_rise_fall_pattern <- ggplot(rise_fall_data, 
+                                                 aes(x = derivative_2h_1h, y = derivative_12h_2h)) +
+  geom_point(color = "#4ba2dd", alpha = 0.7, size = 3) +
+  geom_smooth(method = "lm", color = "#08306b", se = FALSE) +
+  labs(
+    title = "Loading vs Unloading in Rise-and-Fall Pattern",
+    x = "Loading Rate (2h vs 1h)",
+    y = "Unloading Rate (12h vs 2h)"
+  ) +
+  annotate("text", x = Inf, y = -Inf,
+           label = paste("r =", cor_value, "\nP =", p_value),
+           hjust = 1.1, vjust = -0.5, size = 5, color = "black") +
+  theme_bw() +
+  theme(
+    legend.position = "none",
+    axis.title = element_text(size = 14),
+    axis.text = element_text(size = 14, color = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_rect(color = "black", linewidth = 1)
+  )
+
+
+write.csv(rise_fall_data, file = "FigS6B.csv", quote = F, row.names = F)
