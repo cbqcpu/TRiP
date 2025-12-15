@@ -8,12 +8,10 @@ merge_df_counts_THP1 <- merge_df_counts[rowMeans(merge_df_counts[,-1])>1000,]
 load("data/MRLs_293.RData")
 MRL_new_293 <- MRLs_293[[1]]
 MRL_old_293 <- MRLs_293[[2]]
-MRL_total_293 <- MRL_new_293 + MRL_old_293
 
 load("data/MRLs_THP1.RData")
 MRL_new_THP1 <- MRLs_THP1[[1]]
 MRL_old_THP1 <- MRLs_THP1[[2]]
-MRL_total_THP1 <- MRL_new_THP1 + MRL_old_THP1
 
 library(pracma)
 time_points <- c(0.5, 1, 2)  # 30 min, 60 min (1h), 120 min (2h)
