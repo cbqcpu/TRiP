@@ -17,7 +17,6 @@ merge_df_counts_old_select <- data.frame(gene_id = merge_df_counts_select$gene_i
 MRLs <- calculate_polysome_load(merge_df_counts_new_select, merge_df_counts_old_select, c("NC_30min", "NC_1h", "NC_2h"))
 MRL_new <- MRLs[[1]]
 MRL_old <- MRLs[[2]]
-MRL_total <- (MRL_new + MRL_old)/2
 MRL_diff <- MRL_new-MRL_old
 
 MRL_diff_output <- MRL_diff
